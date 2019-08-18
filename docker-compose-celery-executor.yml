@@ -26,7 +26,6 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
-
   scheduler:
     build: .
     restart: always
