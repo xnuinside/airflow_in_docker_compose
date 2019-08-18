@@ -16,14 +16,11 @@ services:
     restart: always
     depends_on:
       - postgres
-    environment:
-      - LOAD_EX=n
-      - EXECUTOR=Local
     volumes:
       - ./airflow/dags:/usr/local/airflow/dags
     ports:
       - "8080:8080"
-    command: webserver
+    entrypoint: airflow webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
       interval: 30s
@@ -34,9 +31,10 @@ services:
     restart: always
     depends_on:
       - postgres
+      - webserver
     volumes:
       - ./airflow/dags:/usr/local/airflow/dags
-    command: scheduler
+    entrypoint: airflow scheduler
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
       interval: 30s
