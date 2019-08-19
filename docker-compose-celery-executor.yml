@@ -11,6 +11,12 @@ services:
       - "5432:5432"
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
+  # uncomment initdb if you need initdb at first run
+  # initdb:
+  # build: .
+  # entrypoint: airflow initdb
+  # depends_on:
+  # - postgres
   webserver:
     build: .
     restart: always
