@@ -23,7 +23,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     ports:
       - "8080:8080"
     entrypoint: airflow webserver
@@ -39,7 +39,7 @@ services:
       - postgres
       - webserver
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow scheduler
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
@@ -54,7 +54,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow worker -cn worker_1
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-worker.pid ]"]
@@ -67,7 +67,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow worker -cn worker_2
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-worker.pid ]"]
@@ -80,7 +80,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow worker -cn worker_3
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-worker.pid ]"]
@@ -93,7 +93,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow flower
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-flower.pid ]"]
