@@ -12,7 +12,7 @@ Apache Airflow with CeleryExecutor:
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
 
-###From 29.11:
+### From 29.11:
 
 1. Apache Airflow Image was updated to version 1.10.6
 2. Added test_dag into airflow_files
