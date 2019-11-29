@@ -11,9 +11,9 @@ Apache Airflow with CeleryExecutor:
 
 ###From 29.11:
 
-1. Image was updated to version 1.10.6
-[Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
+1. Apache Airflow Image was updated to version 1.10.6
+![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 
-[Version](/docs/img/version.png?raw=true "Version Screen")
+![Version](/docs/img/version.png?raw=true "Version Screen")
 
 2. Added test_dag into airflow_files
