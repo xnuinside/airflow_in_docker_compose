@@ -23,7 +23,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     ports:
       - "8080:8080"
     entrypoint: airflow webserver
@@ -39,7 +39,7 @@ services:
       - postgres
       - webserver
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_files/dags:/usr/local/airflow/dags
     entrypoint: airflow scheduler
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
