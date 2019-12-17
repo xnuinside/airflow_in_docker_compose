@@ -24,6 +24,8 @@ services:
       - postgres
     volumes:
       - ./airflow_files/dags:/usr/local/airflow/dags
+      - ./airflow_files/logs:/usr/local/airflow/logs
+      - ./airflow_files/packages:/usr/local/airflow/packages
     ports:
       - "8080:8080"
     entrypoint: airflow webserver
@@ -41,6 +43,7 @@ services:
     volumes:
       - ./airflow_files/dags:/usr/local/airflow/dags
       - ./airflow_files/logs:/usr/local/airflow/logs
+      - ./airflow_files/packages:/usr/local/airflow/packages
     entrypoint: airflow scheduler
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
