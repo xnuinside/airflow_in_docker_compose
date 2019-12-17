@@ -12,6 +12,8 @@ Apache Airflow with LocalExecutor:
 Apache Airflow with CeleryExecutor: 
     <https://medium.com/@xnuinside/quick-tutorial-apache-airflow-with-3-celery-workers-in-docker-composer-9f2f3b445e4>
 
+Install Python dependencies to docker-compose cluster without re-build images
+    <https://medium.com/@xnuinside/install-python-dependencies-to-docker-compose-cluster-without-re-build-images-8c63a431e11c>
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
