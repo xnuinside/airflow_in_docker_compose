@@ -6,14 +6,16 @@ This was not needed previous and default_poll was exist. But now you need to cre
 
 Source files for article with description on Medium
 
-Apache Airflow with LocalExecutor:  
+**Apache Airflow with LocalExecutor:**
     <https://medium.com/@xnuinside/quick-guide-how-to-run-apache-airflow-cluster-in-docker-compose-615eb8abd67a>
     
-Apache Airflow with CeleryExecutor: 
+**Apache Airflow with CeleryExecutor:**
     <https://medium.com/@xnuinside/quick-tutorial-apache-airflow-with-3-celery-workers-in-docker-composer-9f2f3b445e4>
 
-Install Python dependencies to docker-compose cluster without re-build images
+**Install Python dependencies to docker-compose cluster without re-build images**
     <https://medium.com/@xnuinside/install-python-dependencies-to-docker-compose-cluster-without-re-build-images-8c63a431e11c>
+
+
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
