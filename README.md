@@ -19,8 +19,11 @@ Source files for article with description on Medium
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
+### 18.12.19 changes:
+1. added samples for article https://medium.com/@xnuinside/install-python-dependencies-to-docker-compose-cluster-without-re-build-images-8c63a431e11c (docker-compose-volume-packages.yml, packages.pth, added commented lines to Dockerfile)
+2. added .dockerignore
 
-### From 29.11:
+### 29.11.19 changes:
 
 1. Apache Airflow Image was updated to version 1.10.6
 2. Added test_dag into airflow_files
