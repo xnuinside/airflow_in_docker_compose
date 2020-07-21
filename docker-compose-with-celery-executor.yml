@@ -1,0 +1,112 @@
+version: '3.2'
+networks:
+  airflow:
+
+services:
+  postgres:
+    image: postgres:11.5
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_DB=airflow
+      - POSTGRES_PASSWORD=airflow
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./database/data:/var/lib/postgresql/data/pgdata
+      - ./database/logs:/var/lib/postgresql/data/log
+    command: >
+     postgres
+       -c listen_addresses=*
+       -c logging_collector=on
+       -c log_destination=stderr
+       -c max_connections=200
+    networks:
+      - airflow
+  redis:
+    image: redis:5.0.5
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - 6379:6379
+    networks:
+      - airflow
+  webserver:
+    env_file:
+      - .env
+    image: apache/airflow:1.10.11
+    ports:
+      - 8080:8080
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./files:/opt/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - postgres
+      - redis
+    command: webserver
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      - airflow
+  flower:
+    image: apache/airflow:1.10.11
+    env_file:
+      - .env
+    ports:
+      - 5555:5555
+    depends_on:
+      - redis
+    volumes:
+      - ./logs:/opt/airflow/logs
+    command: flower
+    networks:
+      - airflow
+  scheduler:
+    image: apache/airflow:1.10.11
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./files:/opt/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: scheduler
+    networks:
+      - airflow
+  worker:
+    image: apache/airflow:1.10.11
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./files:/opt/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: worker
+    depends_on:
+      - scheduler
+    networks:
+      - airflow
+  initdb:
+    image: apache/airflow:1.10.11
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./files:/opt/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: /bin/bash
+    command: -c "airflow initdb"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - airflow

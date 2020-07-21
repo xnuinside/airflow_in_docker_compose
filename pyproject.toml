@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "y"
+version = "0.1.0"
+description = "Set of Apache Airflow with Docker Compose examples"
+authors = ["y"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest-docker-compose = "^3.1.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
