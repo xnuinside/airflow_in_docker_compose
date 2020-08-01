@@ -81,3 +81,4 @@ And env file with config setting for Airflow (used in docker-compose-with-celery
 
 Or use WSL and run docker under it. 
 
+If you never use docker with mount local folders as volumes under WSL possible you need first follow up this article: https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly#ensure-volume-mounts-work because by default volumes are not mounted correct and you will not see any 'dags' in Airflow. 
