@@ -13,14 +13,8 @@ Docker-compose config based on official image (required docker-compose version 3
 And env file with config setting for Airflow (used in docker-compose-with-celery-executor.yml):
 **[.env](.env)**
 
-*UPGRADE UPPER 1.10.5 be AWARE:*
-You need to define 'default_pool' for task instances and set slots to it. About 1000, for example. 
-This was not needed previous and default_poll was exist. But now you need to create it manually. 
-So just go to UI, Admin -> Pools (http://localhost:8080/admin/pool/) and press *Create*. 
-Create pool with name 'default_pool' and slots, for example 100 or 1000. 
 
 Source files for article with description on Medium.
-
 
 **Apache Airflow with LocalExecutor:**
     <https://medium.com/@xnuinside/quick-guide-how-to-run-apache-airflow-cluster-in-docker-compose-615eb8abd67a>
@@ -35,7 +29,16 @@ Source files for article with description on Medium.
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
-### From 21.07.2020:
+### 07.2020:
+1. All compose files with puckel_image moved to docker_with_puckel_image
+2. Creted docker-compose config based on official image (required docker-compose version 3.7 and higher):
+**[docker-compose-with-celery-executor.yml](docker-compose-with-celery-executor.yml)**
+And env file with config setting for Airflow (used in docker-compose-with-celery-executor.yml):
+**[.env](.env)**
+3. At the bottom of readme added note for Windows 10 users
+
+
+### 21.07.2020:
 1. Docker Compose files with puckel images moved to docker_with_puckel_image
 2. Added docker-compose-with-celery.yml based on official image.
 
@@ -46,4 +49,16 @@ Source files for article with description on Medium.
 ### 29.11.19 changes:
 1. Apache Airflow Image was updated to version 1.10.6
 2. Added test_dag into airflow_files
+
+
+## For Windows 10 Users
+If you try to work on Windows 10 & run docker-compose on it you will got an issue for **postgres** service:
+
+FATAL:  data directory "/var/lib/postgresql/data/pgdata" has wrong ownership
+
+To solve this issue you must do additional steps (unfortanutely there is no more quick workaround, check: https://forums.docker.com/t/data-directory-var-lib-postgresql-data-pgdata-has-wrong-ownership/17963/23 and https://forums.docker.com/t/trying-to-get-postgres-to-work-on-persistent-windows-mount-two-issues/12456/5?u=friism):
+
+1. Create docker volume:
+
+    docker volume create --name volume
 
