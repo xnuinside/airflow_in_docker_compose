@@ -4,7 +4,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:11.5
+    image: postgres:13.1
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_DB=airflow
@@ -36,14 +36,19 @@ services:
   webserver:
     env_file:
       - .env
-    image: apache/airflow:1.10.11
+    image: apache/airflow:1.10.12
     ports:
       - 8080:8080
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ./airflow_files/dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
     depends_on:
       - postgres
       - redis
@@ -56,54 +61,75 @@ services:
     networks:
       - airflow
   flower:
-    image: apache/airflow:1.10.11
+    image: apache/airflow:1.10.12
     env_file:
       - .env
     ports:
       - 5555:5555
     depends_on:
       - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
     volumes:
       - ./logs:/opt/airflow/logs
     command: flower
     networks:
       - airflow
   scheduler:
-    image: apache/airflow:1.10.11
+    image: apache/airflow:1.10.12
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ./airflow_files/dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     command: scheduler
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
     networks:
       - airflow
   worker:
-    image: apache/airflow:1.10.11
+    image: apache/airflow:1.10.12
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ./airflow_files/dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     command: worker
     depends_on:
       - scheduler
+    
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
     networks:
       - airflow
   initdb:
-    image: apache/airflow:1.10.11
+    image: apache/airflow:1.10.12
     env_file:
       - .env
     volumes:
-      - ./dags:/opt/airflow/dags
+      - ./airflow_files/dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 5
     command: -c "airflow initdb"
     depends_on:
       - redis

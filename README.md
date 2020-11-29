@@ -1,3 +1,15 @@
+# How to use
+
+```bash
+
+    git clone https://github.com/xnuinside/airflow_in_docker_compose
+    cd airflow_in_docker_compose
+    docker-compose -f docker-compose-with-celery-executor.yml up --build
+
+```
+
+Wait until all services will succesfull up & open http://localhost:8080/admin. 
+
 # Apache Airflow with Docker Compose examples
 **UPD from July 2020: 
 Those articles was created before release of official Apache Airflow Docker image and they use puckel/docker-airflow. 
