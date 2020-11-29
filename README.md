@@ -41,6 +41,13 @@ Source files for article with description on Medium.
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
+
+### 29.11.2020:
+1. Update Apache Airflow version to 1.10.12
+2. Update PostgreSQL DB to 13.1
+3. Added restart_policy to services in docker-compose
+
+
 ### 07.2020:
 1. All compose files with puckel_image moved to docker_with_puckel_image
 2. Creted docker-compose config based on official image (required docker-compose version 3.7 and higher):
