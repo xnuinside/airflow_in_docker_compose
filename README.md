@@ -1,3 +1,15 @@
+# How to use
+
+```bash
+
+    git clone https://github.com/xnuinside/airflow_in_docker_compose
+    cd airflow_in_docker_compose
+    docker-compose -f docker-compose-with-celery-executor.yml up --build
+
+```
+
+Wait until all services will succesfull up & open http://localhost:8080/admin. 
+
 # Apache Airflow with Docker Compose examples
 **UPD from July 2020: 
 Those articles was created before release of official Apache Airflow Docker image and they use puckel/docker-airflow. 
@@ -28,6 +40,13 @@ Source files for article with description on Medium.
 
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
+
+
+### 29.11.2020:
+1. Update Apache Airflow version to 1.10.12
+2. Update PostgreSQL DB to 13.1
+3. Added restart_policy to services in docker-compose
+
 
 ### 07.2020:
 1. All compose files with puckel_image moved to docker_with_puckel_image
