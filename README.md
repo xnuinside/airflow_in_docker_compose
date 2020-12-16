@@ -44,6 +44,7 @@ Source files for article with description on Medium.
 
 ### 16.12.2020:
 1. Update Apache Airflow version to 1.10.14
+2. Change  init db command to "airflow db init"
 
 
 ### 29.11.2020:
