@@ -42,6 +42,10 @@ Source files for article with description on Medium.
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
 
+### 16.12.2020:
+1. Update Apache Airflow version to 1.10.14
+
+
 ### 29.11.2020:
 1. Update Apache Airflow version to 1.10.12
 2. Update PostgreSQL DB to 13.1
