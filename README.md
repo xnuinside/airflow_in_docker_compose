@@ -1,6 +1,6 @@
 # How to use
 
-**Apache Airflow version 2.0.0** 
+### Apache Airflow version 2.0.0
 (2.0 not 100% bacward compatible to 1.10+ this is because I move it to separate compose file):
 
 By default now RBAC is turn on and this mean, that to use Airflow UI you need create user first, for this in db_init service was added also command to create default user:
@@ -25,7 +25,7 @@ Change your user password and login as you want. By default it is login: admin, 
 ```
 
 
-Apache Airflow version 1.10.14:
+### Apache Airflow version 1.10.14:
 ```bash
 
     git clone https://github.com/xnuinside/airflow_in_docker_compose
