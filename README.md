@@ -1,5 +1,31 @@
 # How to use
 
+**Apache Airflow version 2.0.0** 
+(2.0 not 100% bacward compatible to 1.10+ this is because I move it to separate compose file):
+
+By default now RBAC is turn on and this mean, that to use Airflow UI you need create user first, for this in db_init service was added also command to create default user:
+>> *airflow users create --firstname admin --lastname admin --email admin --password admin --username admin --role Admin*
+
+Change your user password and login as you want. By default it is login: admin, password: admin.
+
+![New Apache Airflow 2.0](/docs/img/2.0.png?raw=true "Apache Airflow 2.0")
+
+
+**[docker-compose-with-celery-executor.yml](docker-compose-2.0-with-celery-executor.yml)**
+
+**NOTE: if you previous run Airflow 1.10 - remove your DB volume files before run 2.0 or change db init command to db upgrade.**
+
+```bash
+
+    git clone https://github.com/xnuinside/airflow_in_docker_compose
+    cd airflow_in_docker_compose
+    
+    docker-compose -f docker-compose-2.0-with-celery-executor.yml up --buil
+
+```
+
+
+Apache Airflow version 1.10.14:
 ```bash
 
     git clone https://github.com/xnuinside/airflow_in_docker_compose
@@ -40,6 +66,10 @@ Source files for article with description on Medium.
 
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
+
+
+### 18.12.2020:
+1. Added separate docker-compose file for Apache Airflow 2.0 version
 
 
 ### 16.12.2020:
