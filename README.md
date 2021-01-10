@@ -1,5 +1,7 @@
 # How to use
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z237B0Q)
+
 ### Apache Airflow version 2.0.0
 (2.0 not 100% bacward compatible to 1.10+ this is because I move it to separate compose file):
 
