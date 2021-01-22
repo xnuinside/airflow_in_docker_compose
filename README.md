@@ -22,7 +22,7 @@ Change your user password and login as you want. By default it is login: admin, 
     git clone https://github.com/xnuinside/airflow_in_docker_compose
     cd airflow_in_docker_compose
     
-    docker-compose -f docker-compose-2.0-with-celery-executor.yml up --buil
+    docker-compose -f docker-compose-2.0-with-celery-executor.yml up --build
 
 ```
 
