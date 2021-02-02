@@ -45,11 +45,11 @@ Exists different behaviour of Docker Compose on different OS relative to fs stru
 
 In issues you can find some cases when something goes wrong and maybe it will help you to solve own issue.
 
-Ubuntu Issues:
+**Ubuntu Issues:**
 
 1. [Permission denied error](https://github.com/xnuinside/airflow_in_docker_compose/issues/4)
 
-WSL Issues:
+**WSL Issues:**
 
 1. [No DAGs in UI in Airflow 2.0 & failed airflow init on second runs](https://github.com/xnuinside/airflow_in_docker_compose/issues/10) - Not resolved yet
 
