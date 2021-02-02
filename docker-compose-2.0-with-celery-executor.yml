@@ -115,6 +115,7 @@ services:
         max_attempts: 3
     networks:
       - airflow
+  # comment initdb section after first usage if you want, it will needed only once at the first start
   initdb:
     image: apache/airflow:2.0.0-python3.8    
     env_file:
