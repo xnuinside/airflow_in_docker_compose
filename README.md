@@ -2,6 +2,7 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z237B0Q)
 
+
 ### Apache Airflow version 2.0.0
 (2.0 not 100% bacward compatible to 1.10+ this is because I move it to separate compose file):
 
@@ -37,6 +38,26 @@ Change your user password and login as you want. By default it is login: admin, 
 ```
 
 Wait until all services will succesfull up & open http://localhost:8080/admin. 
+
+### FAQ & Help
+
+Exists different behaviour of Docker Compose on different OS relative to fs structure, work with access rights & etc. This docker-compose file tested by me in MacOS mostly, some time I can up & run it on wsl (but not each update). 
+
+In issues you can find some cases when something goes wrong and maybe it will help you to solve own issue.
+
+**Ubuntu Issues:**
+
+1. [Permission denied error](https://github.com/xnuinside/airflow_in_docker_compose/issues/4)
+
+**WSL Issues:**
+
+1. [No DAGs in UI in Airflow 2.0 & failed airflow init on second runs](https://github.com/xnuinside/airflow_in_docker_compose/issues/10) - Not resolved yet
+
+
+Also at the end of this README.md file exists section https://github.com/xnuinside/airflow_in_docker_compose#for-windows-10-users with some information wor WSL users. Maybe it also can help. 
+
+If you had any troubles & you successfully solve it - please open an issue with solution, I will add it to this readme.md file. Thank you!
+
 
 # Apache Airflow with Docker Compose examples
 **UPD from July 2020: 
