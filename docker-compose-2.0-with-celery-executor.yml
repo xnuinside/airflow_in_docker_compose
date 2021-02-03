@@ -47,11 +47,13 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 8s
+        delay: 5s
         max_attempts: 3
+        window: 120s
     depends_on:
       - postgres
       - redis
+      - initdb
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
@@ -88,11 +90,13 @@ services:
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     command: scheduler
+    depends_on:
+      - initdb
     deploy:
       restart_policy:
-        condition: on-failure
-        delay: 8s
-        max_attempts: 3
+        condition: any
+        delay: 5s
+        window: 120s
     networks:
       - airflow
   worker:
@@ -107,7 +111,6 @@ services:
     command: celery worker
     depends_on:
       - scheduler
-    
     deploy:
       restart_policy:
         condition: on-failure
@@ -115,7 +118,6 @@ services:
         max_attempts: 3
     networks:
       - airflow
-  # comment initdb section after first usage if you want, it will needed only once at the first start
   initdb:
     image: apache/airflow:2.0.0-python3.8    
     env_file:
