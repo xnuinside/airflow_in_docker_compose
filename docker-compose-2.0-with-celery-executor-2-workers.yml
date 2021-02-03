@@ -99,7 +99,7 @@ services:
         window: 120s
     networks:
       - airflow
-  worker:
+  worker_1:
     image: apache/airflow:2.0.0-python3.8
     env_file:
       - .env
@@ -108,7 +108,26 @@ services:
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
-    command: celery worker
+    command: celery worker -H worker_1_name
+    depends_on:
+      - scheduler
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
+    networks:
+      - airflow
+  worker_2:
+    image: apache/airflow:2.0.0-python3.8
+    env_file:
+      - .env
+    volumes:
+      - ./airflow_files/dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./files:/opt/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: celery worker -H worker_2_name
     depends_on:
       - scheduler
     deploy:

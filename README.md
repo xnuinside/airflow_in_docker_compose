@@ -13,6 +13,13 @@ Change your user password and login as you want. By default it is login: admin, 
 
 ![New Apache Airflow 2.0](/docs/img/2.0.png?raw=true "Apache Airflow 2.0")
 
+**Note:**
+If you will run docker-compose for 2nd and more times in init_db you will see log:
+
+```
+    initdb_1     | admin already exist in the db
+    airflow_in_docker_compose_initdb_1 exited with code 0
+```
 
 **[docker-compose-with-celery-executor.yml](docker-compose-2.0-with-celery-executor.yml)**
 
@@ -26,6 +33,16 @@ Change your user password and login as you want. By default it is login: admin, 
     docker-compose -f docker-compose-2.0-with-celery-executor.yml up --build
 
 ```
+### Apache Airflow 2.* with 2 Celery Workers (or more)
+
+Because was issue about run Apache 2.0 with 2 Celery workers I think will be not bad to have docker-compose with such set up. 
+
+I added it as separate compose file:
+
+**[docker-compose-2.0-with-celery-executor-2-workers.yml](docker-compose-2.0-with-celery-executor-2-workers.yml)**
+
+To check that your workers up&run well - use flower UI (it exists in docker-compose setup):
+![Flower UI with 2 workers](/docs/img/flower.png?raw=true "Flower UI with 2 workers")
 
 
 ### Apache Airflow version 1.10.14:
@@ -41,7 +58,7 @@ Wait until all services will succesfull up & open http://localhost:8080/admin.
 
 ### FAQ & Help
 
-Exists different behaviour of Docker Compose on different OS relative to fs structure, work with access rights & etc. This docker-compose file tested by me in MacOS mostly, some time I can up & run it on wsl (but not each update). 
+Exists different behaviour of Docker Compose on different OS relative to file system specifications, work with access rights & etc. This docker-compose file tested by me in MacOS mostly, some time I can up & run it on wsl (but not each update).
 
 In issues you can find some cases when something goes wrong and maybe it will help you to solve own issue.
 
@@ -53,8 +70,24 @@ In issues you can find some cases when something goes wrong and maybe it will he
 
 1. [No DAGs in UI in Airflow 2.0 & failed airflow init on second runs](https://github.com/xnuinside/airflow_in_docker_compose/issues/10) - Not resolved yet
 
-
 Also at the end of this README.md file exists section https://github.com/xnuinside/airflow_in_docker_compose#for-windows-10-users with some information wor WSL users. Maybe it also can help. 
+
+**Problem with connection to PostgreSQL (at first time run)**:
+
+If you share low count of resources for Docker or you have a machine with low perfomance, up&run PostgreSQL for the first time can take a significant time. And you can see the errors like this:
+
+``` 
+Is the server running on host "postgres" (172.25.0.3) and accepting
+initdb_1     |  TCP/IP connections on port 5432?
+```
+
+In normal behaviour - in docker-compose I added autorestarts so after 10-15 secs all servers will be up&run, but sometimes 3 retries can be not enough. 
+
+I can recommend in this case at first time run postgres service separate until you will see information that Postgres is up & ready to accept connections.:
+
+```
+    docker-compose -f docker-compose-2.0-with-celery-executor-2-workers.yml up --build postgres
+```
 
 If you had any troubles & you successfully solve it - please open an issue with solution, I will add it to this readme.md file. Thank you!
 
@@ -89,6 +122,15 @@ Source files for article with description on Medium.
 
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
+
+
+### 03.02.2021:
+1. In docker-compose files for Airflow 2.0 **scheduler** service restart police changed to 'any' because for some reason it exist with 0 if error in DB and init is not finished yet, so restart policy 'on-failure' does not works. 
+2. Added example for Apached Airflow 2.0 with 2 workers. 
+
+### 02.02.2021:
+1. Added FAQ section with issues that might help 
+2. Updated fernet key in .env
 
 
 ### 18.12.2020:
