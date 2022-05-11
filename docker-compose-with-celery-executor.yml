@@ -36,7 +36,7 @@ services:
   webserver:
     env_file:
       - .env
-    image: apache/airflow:1.10.14
+    image: apache/airflow:1.10.15
     ports:
       - 8080:8080
     volumes:
@@ -61,7 +61,7 @@ services:
     networks:
       - airflow
   flower:
-    image: apache/airflow:1.10.14
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     ports:
@@ -79,7 +79,7 @@ services:
     networks:
       - airflow
   scheduler:
-    image: apache/airflow:1.10.14
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
@@ -96,7 +96,7 @@ services:
     networks:
       - airflow
   worker:
-    image: apache/airflow:1.10.14
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
@@ -116,7 +116,7 @@ services:
     networks:
       - airflow
   initdb:
-    image: apache/airflow:1.10.14
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
