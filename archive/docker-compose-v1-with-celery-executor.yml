@@ -36,7 +36,7 @@ services:
   webserver:
     env_file:
       - .env
-    image: apache/airflow:2.0.0-python3.8
+    image: apache/airflow:1.10.15
     ports:
       - 8080:8080
     volumes:
@@ -47,13 +47,11 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 5s
+        delay: 8s
         max_attempts: 3
-        window: 120s
     depends_on:
       - postgres
       - redis
-      - initdb
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
@@ -63,7 +61,7 @@ services:
     networks:
       - airflow
   flower:
-    image: apache/airflow:2.0.0-python3.8
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     ports:
@@ -77,11 +75,11 @@ services:
         max_attempts: 3
     volumes:
       - ./logs:/opt/airflow/logs
-    command: celery flower
+    command: flower
     networks:
       - airflow
   scheduler:
-    image: apache/airflow:2.0.0-python3.8
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
@@ -90,17 +88,15 @@ services:
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     command: scheduler
-    depends_on:
-      - initdb
     deploy:
       restart_policy:
-        condition: any
-        delay: 5s
-        window: 120s
+        condition: on-failure
+        delay: 8s
+        max_attempts: 3
     networks:
       - airflow
   worker:
-    image: apache/airflow:2.0.0-python3.8
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
@@ -108,9 +104,10 @@ services:
       - ./logs:/opt/airflow/logs
       - ./files:/opt/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
-    command: celery worker
+    command: worker
     depends_on:
       - scheduler
+    
     deploy:
       restart_policy:
         condition: on-failure
@@ -119,7 +116,7 @@ services:
     networks:
       - airflow
   initdb:
-    image: apache/airflow:2.0.0-python3.8    
+    image: apache/airflow:1.10.15
     env_file:
       - .env
     volumes:
@@ -133,7 +130,7 @@ services:
         condition: on-failure
         delay: 8s
         max_attempts: 5
-    command: -c "airflow db init && airflow users create --firstname admin --lastname admin --email admin --password admin --username admin --role Admin"
+    command: -c "airflow db init"
     depends_on:
       - redis
       - postgres
