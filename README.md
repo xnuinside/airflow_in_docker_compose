@@ -121,6 +121,10 @@ Source files for article with description on Medium.
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
+### 20.09.2022:
+1. Updated version to 2.4.0
+2. all files with version 1.* & puckel images moved to "archive" folder
+3. 2* became default version
 
 ### 03.02.2021:
 1. In docker-compose files for Airflow 2.0 **scheduler** service restart police changed to 'any' because for some reason it exist with 0 if error in DB and init is not finished yet, so restart policy 'on-failure' does not works. 
