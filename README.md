@@ -125,6 +125,7 @@ Source files for article with description on Medium.
 1. Updated version to 2.4.0
 2. all files with version 1.* & puckel images moved to "archive" folder
 3. 2* became default version
+4. Updated docker-compose version
 
 ### 03.02.2021:
 1. In docker-compose files for Airflow 2.0 **scheduler** service restart police changed to 'any' because for some reason it exist with 0 if error in DB and init is not finished yet, so restart policy 'on-failure' does not works. 
