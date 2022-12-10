@@ -48,7 +48,9 @@ To check that your workers up&run well - use flower UI (it exists in docker-comp
 
     git clone https://github.com/xnuinside/airflow_in_docker_compose
     cd airflow_in_docker_compose
-    docker-compose -f docker-compose-with-celery-executor.yml up --build
+
+    # to run airflow with 1 Celery worker
+    docker-compose up --build
 
 ```
 
@@ -121,15 +123,14 @@ Source files for article with description on Medium.
 ![Main Apache Airflow UI](/docs/img/main.png?raw=true "Main Apache Airflow UI")
 ![Version](/docs/img/version.png?raw=true "Version Screen")
 
+### 10.12.2022:
+1. Updated version to 2.5.0
+
 ### 20.09.2022:
 1. Updated version to 2.4.0
 2. all files with version 1.* & puckel images moved to "archive" folder
 3. 2* became default version
 4. Updated docker-compose version
-
-### 10.12.2022:
-1. Updated version to 2.5.0
-
 
 ### 20.09.2022:
 1. Updated version to 2.4.0
