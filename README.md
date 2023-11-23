@@ -1,3 +1,7 @@
+# Maybe you will be also interested
+
+* [airflow-helper](https://github.com/xnuinside/airflow-helper) - Pretty Fresh command line tool to set up Apache Airflow connections, variables & pools from yaml config. Support config inheritance & feature to get settings from existed server.
+
 # Official Docker-Compose
 Pay attention that in current time already exists official Docker-Compose.yml https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html (maybe better to use it)
 
